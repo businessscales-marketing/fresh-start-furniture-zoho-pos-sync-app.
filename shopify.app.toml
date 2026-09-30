@@ -1,0 +1,45 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "0e8a86ec0ac372b23aaf1c0e9f215366"
+application_url = "https://zoho-pos-sync-app.onrender.com"
+embedded = true
+name = "zoho-pos-sync-app"
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "write_products,read_orders,write_metaobjects,write_metaobject_definitions"
+
+[product.metafields.app.source_info]
+type = "single_line_text_field"
+name = "Source Info"
+description = "Tracks product source information for synchronization"
+
+  [product.metafields.app.source_info.access]
+  admin = "merchant_read_write"
+
+[webhooks]
+api_version = "2026-10"
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/app/uninstalled"
+  topics = [ "app/uninstalled" ]
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/app/scopes_update"
+  topics = [ "app/scopes_update" ]
+
+  [[webhooks.subscriptions]]
+  uri = "/webhooks/orders/paid"
+  topics = [ "orders/paid" ]
+
+
+
+[auth]
+redirect_urls = [ "https://zoho-pos-sync-app.onrender.com/auth/callback" ]
+
+[build]
+automatically_update_urls_on_dev = true
+
+
+
+
